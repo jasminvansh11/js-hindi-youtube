@@ -9,19 +9,24 @@
     <h1>Chai aur Javascript</h1>
     <button id="start">Start</button>
     <button id="stop">Stop</button>
+    <h2></h2>
 </body>
 <script>
     let intervalId;
     const sayDate = function(str){
         console.log(str, Date.now());
+
     }
 
     document.getElementById('start').addEventListener('click', function() {
         intervalId = setInterval(sayDate, 1000, "Time:");
+        document.querySelector("h2").innerHTML = "Date print start Check Console</h1>"
+        
     });
 
     document.getElementById('stop').addEventListener('click', function() {
         clearInterval(intervalId);
+         document.querySelector("h2").innerHTML = "Date print stop , Check Console</h1>"
     });
 </script>
 </html>
