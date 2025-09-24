@@ -81,9 +81,12 @@
 
 
 
-        let interval;
+        let intervalId;
         const startChangeColor = function () {
-            interval = setInterval(changeStart, 1000)
+            if (!intervalId) {
+                intervalId = setInterval(changeStart, 1000)
+            }
+
             function changeStart() {
                 document.body.style.backgroundColor = randomColor()
 
@@ -92,7 +95,8 @@
         }
 
         const StopChangeColor = function () {
-            clearInterval(interval)
+            clearInterval(intervalId)
+            intervalId = null;
         }
 
         document.querySelector("#start").addEventListener("click", startChangeColor);
