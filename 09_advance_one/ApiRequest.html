@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api Request</title>
+</head>
+
+<body>
+    <button id="load-btn">Show User Info</button>
+    <div class="card" style="display:none;">
+        <img src="" alt="Profile Photo" class="card-photo" id="profile-photo">
+        <div class="card-info">
+            <h2 id="user-name">Chai Aur Code</h2>
+            <p>Followers: <span id="follower-count">0</span></p>
+            <h6></h6>
+        </div>
+    </div>
+    <style>
+        .card {
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 32px auto;
+            background: #fff;
+        }
+
+        .card-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .card-info h2 {
+            margin: 0 0 8px 0;
+            font-size: 1.2em;
+        }
+
+        .card-info p {
+            margin: 0;
+            font-size: 1em;
+            color: #555;
+        }
+    </style>
+</body>
+<script>
+   
+    document.getElementById('load-btn').addEventListener('click', function() {
+        const requestUrl = 'https://api.github.com/users/hiteshchoudhary';
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', requestUrl);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const data = JSON.parse(this.responseText);
+                document.querySelector('.card').style.display = 'flex';
+                document.getElementById('profile-photo').src = data.avatar_url;
+                document.getElementById('user-name').innerText = data.name || data.login;
+                document.getElementById('follower-count').innerText = data.followers;
+            }
+        }
+        xhr.send();
+    });
+
+
+</script>
+
+</html>
